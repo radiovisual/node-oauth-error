@@ -7,15 +7,14 @@
 
 ## Why? 
 
-For some reason, the popular [oauth](https://github.com/ciaranj/node-oauth) module returns object literals instead of Error() objects,
-so this module simply converts node-oauth object-literal errors into actual Error() objects. *See oauth [#250](https://github.com/ciaranj/node-oauth/issues/250), [#84](https://github.com/ciaranj/node-oauth/pull/84), and [#155](https://github.com/ciaranj/node-oauth/pull/155)* 
+For some reason, the popular [oauth](https://github.com/ciaranj/node-oauth) module returns object literals instead of `Error()` objects,
+so this module simply converts oauth object-literal errors into actual `Error()` objects. *See oauth [#250](https://github.com/ciaranj/node-oauth/issues/250), [#84](https://github.com/ciaranj/node-oauth/pull/84), and [#155](https://github.com/ciaranj/node-oauth/pull/155).* 
 
 
 ## Contribute
 
-This module is in the very beginning stages of development. I made it to satisfy a need in a specific project,
-but I would love to see this module grow to its full potential. Please test this module in your projects and open issues
-or send pull requests if you would like to extend/improve its functionality. :smile:
+Please test this module in your projects and open issues or send pull requests if you would like to improve, extend or
+fix anything in this module. :smile:
 
 
 ## Install
@@ -33,17 +32,18 @@ const OAuth = require('oauth');
 const OAuthError = require('node-oauth-error');
 
 oauth.get('some/url/endpoint',
-    credentials.accessToken,
-    credentials.accessTokenSecret,
-    (err, data) => {
-        if (err) {
-            // convert the oauth error into a real `Error()`.
-		    throw new OAuthError(err);			
+	credentials.accessToken,
+	credentials.accessTokenSecret,
+	(err, data) => {
+		if (err) {
+			// convert the oauth error into a real `Error()`.
+			throw new OAuthError(err);
 		}
 		// ...
 	}
 );
 ```
+
 
 ## Notes
 
@@ -65,7 +65,8 @@ Format #2:
 }
 ```
 
-If you know of any other formats that the error objects can have, please open an issue or send a pull request. *Thanks!*
+If you see something I am missing, please open an issue or send a pull request. *Thanks!*
+
 
 ## API
 
@@ -77,7 +78,6 @@ If you know of any other formats that the error objects can have, please open an
 Type: `object`
 
 The original [oauth](https://github.com/ciaranj/node-oauth) error object literal you want to convert to an actual Error. 
-
 
 
 ## License

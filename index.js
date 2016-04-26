@@ -48,3 +48,4 @@ function message(obj) {
 }
 
 require('util').inherits(module.exports, Error);
+
