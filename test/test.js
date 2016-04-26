@@ -1,6 +1,6 @@
 var assert = require('assert');
 var util = require('util');
-
+var OAuth = require('oauth');
 var OAuthError = require('../index.js');
 
 function whoops1() {
@@ -61,3 +61,40 @@ try {
 	assert.strictEqual(err.message, 'unspecified OAuthError.');
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// Actually test the Error output against a
+// real oauth (node-oauth) instance.
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+const oauth = new OAuth.OAuth(
+	'https://api.twitter.com/oauth/request_token',
+	'https://api.twitter.com/oauth/access_token',
+	'consumerKey',
+	'consumerSecret',
+	'1.0A',
+	null,
+	'HMAC-SHA1'
+);
+
+oauth.get(
+	`https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=screenname&include_rts=1&count=200`,
+	'accessToken',
+	'accessTokenSecret',
+	function (err, data) {
+		if (err) {
+			try {
+				throw new OAuthError(err);
+			} catch (err) {
+				assert(data);
+				assert(err.name = 'OAuthError');
+				assert(err instanceof OAuthError);
+				assert(err instanceof Error);
+				assert(util.isError(err));
+				assert(err.stack);
+				assert.strictEqual(err.toString(), 'OAuthError: Invalid or expired token.');
+				assert.strictEqual(err.stack.split('\n')[0], 'OAuthError: Invalid or expired token.');
+				assert.strictEqual(err.statusCode, 401);
+				assert.strictEqual(err.url, '');
+			}
+		}
+	}
+);

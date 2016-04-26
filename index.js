@@ -2,7 +2,7 @@
 /**
  * Convert the given object-literal error into an Error() object.
  *
- *   Note: node-oauth returns objects that look like one of the following:
+ *   Note: oauth returns objects that look like one of the following:
  *
  *   Format #1:
  *		{
@@ -16,7 +16,7 @@
  *		 data: '{"errors": [{"code":89, "message": "Invalid or expired token."}]}'
  *	   }
  *
- * @param {object} obj - the node-oauth object you want to convert
+ * @param {object} obj - the original oauth error object you want to convert
  */
 module.exports = function OAuthError(obj) {
 	// Safeguard against environments that might not have Error.captureStackTrace
