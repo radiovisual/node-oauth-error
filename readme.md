@@ -1,6 +1,9 @@
-# node-oauth-error [![Build Status](https://travis-ci.org/radiovisual/node-oauth-error.svg?branch=master)](https://travis-ci.org/radiovisual/node-oauth-error)
+# node-oauth-error
 
 > Convert node-oauth object-literal errors into actual Error() objects. 
+
+[![Build Status](https://travis-ci.org/radiovisual/node-oauth-error.svg?branch=master)](https://travis-ci.org/radiovisual/node-oauth-error) [![Coverage Status](https://coveralls.io/repos/github/radiovisual/node-oauth-error/badge.svg?branch=master)](https://coveralls.io/github/radiovisual/node-oauth-error?branch=master)
+
 
 ## Why? 
 For some reason, the popular [node-oauth](https://github.com/ciaranj/node-oauth) module returns object literals instead of Error() objects,
@@ -35,13 +38,14 @@ oauth.get(`some/url/endpoint`,
 
 ## API
 
-### throw new nodeOauthError(input)
+### throw new NodeOauthError(input)
 
 #### input
 
+*Required*  
 Type: `object`
 
-The original [node-oauth](https://github.com/ciaranj/node-oauth) error object literal you want to convert. 
+The original [node-oauth](https://github.com/ciaranj/node-oauth) error object literal you want to convert to an actual Error. 
 
 
 
