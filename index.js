@@ -18,7 +18,7 @@
  *
  * @param {object} obj - the node-oauth object you want to convert
  */
-module.exports = function OauthError(obj) {
+module.exports = function OAuthError(obj) {
 	// Safeguard against environments that might not have Error.captureStackTrace
 	if (Error.captureStackTrace) {
 		Error.captureStackTrace(this, this.constructor);
@@ -44,7 +44,7 @@ function message(obj) {
 			return obj.data.errors[0].message;
 		}
 	}
-	return 'unspecified OauthError.';
+	return 'unspecified OAuthError.';
 }
 
 require('util').inherits(module.exports, Error);
