@@ -65,7 +65,7 @@ try {
 // Actually test the Error output against a
 // real oauth (node-oauth) instance.
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-const oauth = new OAuth.OAuth(
+var oauth = new OAuth.OAuth(
 	'https://api.twitter.com/oauth/request_token',
 	'https://api.twitter.com/oauth/access_token',
 	'consumerKey',
@@ -76,7 +76,7 @@ const oauth = new OAuth.OAuth(
 );
 
 oauth.get(
-	`https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=screenname&include_rts=1&count=200`,
+	'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=screenname&include_rts=1&count=200',
 	'accessToken',
 	'accessTokenSecret',
 	function (err, data) {
