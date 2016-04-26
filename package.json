@@ -21,10 +21,14 @@
   ],
   "keywords": [
     "node-oauth",
+    "node-oauth-error",
     "oauth",
     "covert",
     "error",
-    "object"
+    "object",
+    "change",
+    "Error",
+    "literal"
   ],
   "dependencies": {},
   "devDependencies": {
