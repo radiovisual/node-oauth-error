@@ -1,6 +1,6 @@
 {
   "name": "node-oauth-error",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Convert oauth object-literal errors into actual Error() objects.",
   "license": "MIT",
   "repository": "radiovisual/node-oauth-error",
