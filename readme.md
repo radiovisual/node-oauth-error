@@ -35,7 +35,7 @@ Below is a usage example where a typical oauth setup is shown, but some irreleva
 const OAuth = require('oauth');
 const OAuthError = require('node-oauth-error');
 
-const oauth = new OAuth.OAuth(/*...*/);
+const oauth = new OAuth.OAuth(/* ... */);
 
 oauth.get('some/url/endpoint',
   // ...
