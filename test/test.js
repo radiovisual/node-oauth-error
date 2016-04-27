@@ -5,7 +5,7 @@ var OAuthError = require('../index.js');
 
 var throwFromSample1 = require('./oauth-error-samples/sample01.js');
 var throwFromSample2 = require('./oauth-error-samples/sample02.js');
-var throwFromNoDataSample = require('./oauth-error-samples/sampleNoDataprop.js');
+var throwFromNoDataSample = require('./oauth-error-samples/sampleNoDataProp.js');
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 // Test the Error() object returned from the known
