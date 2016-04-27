@@ -1,21 +1,6 @@
 'use strict';
 /**
- * Convert the given object-literal error into an Error() object.
- *
- *   Note: oauth returns objects that look like one of the following:
- *
- *   Format #1:
- *		{
- *	   	  statusCode: 401,
- *		  data: '{"request": "\\/1.1\\/statuses\\/user_timeline.json", "error": "Not authorized."}'
- *  	}
- *
- *   Format #2:
- *     {
- *		 statusCode: 401,
- *		 data: '{"errors": [{"code":89, "message": "Invalid or expired token."}]}'
- *	   }
- *
+ * Convert the given oauth object-literal error into a real Error() object.
  * @param {object} obj - the original oauth error object you want to convert
  */
 module.exports = function OAuthError(obj) {
