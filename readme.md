@@ -32,15 +32,15 @@ const oauth = require('oauth');
 const OAuthError = require('node-oauth-error');
 
 oauth.get('some/url/endpoint',
-	credentials.accessToken,
-	credentials.accessTokenSecret,
-	(err, data) => {
-		if (err) {
-			// convert the oauth error into a real `Error()`.
-			throw new OAuthError(err);
-		}
-		// ...
-	}
+  credentials.accessToken,
+  credentials.accessTokenSecret,
+  (err, data) => {
+    if (err) {
+      // convert the oauth error into a real `Error()`.
+      throw new OAuthError(err);
+    }
+	// ...
+  }
 );
 ```
 
@@ -52,16 +52,16 @@ This module knows how to convert oauth errors that have the following formats:
 Format #1:
 ```js
 {
-    statusCode: 401,
-    data: '{"request": "\\/1.1\\/statuses\\/user_timeline.json", "error": "Not authorized."}'
+  statusCode: 401,
+  data: '{"request": "\\/1.1\\/statuses\\/user_timeline.json", "error": "Not authorized."}'
 }
 ```
 
 Format #2:
 ```js
 {
-    statusCode: 401,
-    data: '{"errors": [{"code":89, "message": "Invalid or expired token."}]}'
+  statusCode: 401,
+  data: '{"errors": [{"code":89, "message": "Invalid or expired token."}]}'
 }
 ```
 
