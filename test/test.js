@@ -3,29 +3,16 @@ var util = require('util');
 var OAuth = require('oauth');
 var OAuthError = require('../index.js');
 
-function whoops1() {
-	var sampleError = {
-		statusCode: 401,
-		data: '{"request": "\\/1.1\\/statuses\\/user_timeline.json", "error": "Not authorized."}'
-	};
-	throw new OAuthError(sampleError);
-}
+var throwFromSample1 = require('./oauth-error-samples/sample01.js');
+var throwFromSample2 = require('./oauth-error-samples/sample02.js');
+var throwFromNoDataSample = require('./oauth-error-samples/sampleNoDataprop.js');
 
-function whoops2() {
-	var sampleError = {
-		statusCode: 401,
-		data: '{"errors": [{"code":89, "message": "Invalid or expired token."}]}'
-	};
-	throw new OAuthError(sampleError);
-}
-
-function whoops3() {
-	var sampleError = {statusCode: 401};
-	throw new OAuthError(sampleError);
-}
-
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// Test the Error() object returned from the known
+// oauth error object sample with: `data.error`
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 try {
-	whoops1();
+	throwFromSample1();
 } catch (err) {
 	assert(err.name = 'OAuthError');
 	assert(err instanceof OAuthError);
@@ -34,13 +21,17 @@ try {
 	assert(err.stack);
 	assert.strictEqual(err.toString(), 'OAuthError: Not authorized.');
 	assert.strictEqual(err.stack.split('\n')[0], 'OAuthError: Not authorized.');
-	assert.strictEqual(err.stack.split('\n')[1].indexOf('whoops1'), 7);
+	assert.strictEqual(err.stack.split('\n')[1].indexOf('throw01'), 7);
 	assert.strictEqual(err.statusCode, 401);
 	assert.strictEqual(err.url, '/1.1/statuses/user_timeline.json');
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// Test the Error() object returned from the known
+// oauth error object sample with: `data.errors[]`
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 try {
-	whoops2();
+	throwFromSample2();
 } catch (err) {
 	assert(err.name = 'OAuthError');
 	assert(err instanceof OAuthError);
@@ -49,27 +40,29 @@ try {
 	assert(err.stack);
 	assert.strictEqual(err.toString(), 'OAuthError: Invalid or expired token.');
 	assert.strictEqual(err.stack.split('\n')[0], 'OAuthError: Invalid or expired token.');
-	assert.strictEqual(err.stack.split('\n')[1].indexOf('whoops2'), 7);
+	assert.strictEqual(err.stack.split('\n')[1].indexOf('throw02'), 7);
 	assert.strictEqual(err.statusCode, 401);
 	assert.strictEqual(err.url, '');
 }
 
-// Unspecified message when no message is present
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// Unspecified message when no message data is present
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 try {
-	whoops3();
+	throwFromNoDataSample();
 } catch (err) {
 	assert.strictEqual(err.message, 'unspecified OAuthError.');
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-// Actually test the Error output against a
-// real oauth (node-oauth) instance.
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// Actually test the Error output against a real
+// oauth (node-oauth) instance using invalid credentials.
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 var oauth = new OAuth.OAuth(
 	'https://api.twitter.com/oauth/request_token',
 	'https://api.twitter.com/oauth/access_token',
-	'consumerKey',
-	'consumerSecret',
+	'invalidConsumerKey',
+	'invalidConsumerSecret',
 	'1.0A',
 	null,
 	'HMAC-SHA1'
@@ -77,8 +70,8 @@ var oauth = new OAuth.OAuth(
 
 oauth.get(
 	'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=screenname&include_rts=1&count=200',
-	'accessToken',
-	'accessTokenSecret',
+	'invalidAccessToken',
+	'invalidAccessTokenSecret',
 	function (err, data) {
 		if (err) {
 			try {
