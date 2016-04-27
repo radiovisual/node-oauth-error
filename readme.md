@@ -39,7 +39,7 @@ oauth.get('some/url/endpoint',
       // convert the oauth error into a real `Error()`.
       throw new OAuthError(err);
     }
-	// ...
+    // ...
   }
 );
 ```
