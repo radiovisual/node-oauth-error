@@ -28,7 +28,7 @@ $ npm install --save node-oauth-error
 ## Usage
 
 ```js
-const OAuth = require('oauth');
+const oauth = require('oauth');
 const OAuthError = require('node-oauth-error');
 
 oauth.get('some/url/endpoint',
