@@ -27,9 +27,20 @@ $ npm install --save node-oauth-error
 
 ## Usage
 
+To use node-oauth-error, simply pass the original
+oauth error object into the `OAuthError()` constructor:
+
 ```js
-const oauth = require('oauth');
+new OAuthError(oauthErrorObj);
+```
+
+Below is a more complete usage example. Check out the error handler towards the bottom:
+
+```js
+const OAuth = require('oauth');
 const OAuthError = require('node-oauth-error');
+
+const oauth = new OAuth.OAuth(/*...*/);
 
 oauth.get('some/url/endpoint',
   credentials.accessToken,
