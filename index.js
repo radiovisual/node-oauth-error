@@ -32,5 +32,6 @@ function message(obj) {
 	return 'unspecified OAuthError.';
 }
 
+// Inherit from node's `Error` object
 require('util').inherits(module.exports, Error);
 
