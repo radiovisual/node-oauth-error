@@ -70,7 +70,9 @@ If you see something I am missing, please open an issue or send a pull request. 
 
 ## API
 
-### throw new OAuthError(input)
+### OAuthError(input)
+
+The Error constructor.
 
 #### input
 
